@@ -40,16 +40,24 @@
         </div>
 
         
-        <div class="complete">
+        <div class="complete_container" v-if="completeTasks.length !== 0">
             <h2>Complete</h2>
             <div class="completeTasks" v-for="(task, index) in completeTasks">
                 <span> {{ task }}</span>
 
                 <i class="fas fa-pen" @click="replace(index)"></i>
-
             </div>
         </div>
 
+        <div class="trash_container" v-if="trashTasks.length !== 0">
+            <h2>Trashed</h2>
+            <i class="fas fa-dumpster" @click="deleteAll"></i>
+            <div class="trashedTasks" v-for="(task, index) in trashTasks">
+                <span> {{task}} </span>
+
+                <i class="fas fa-trash-restore" @click="replaceTrash(index)"></i>
+            </div>
+        </div>
         
 
 
