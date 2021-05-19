@@ -16,7 +16,19 @@
     <title>ToDo List</title>
 </head>
 <body>
-    
+    <div id="app">
+        <input type="text" placeholder="Insert task here" v-model="task" v-on:keyup.enter="addTask">
+        <button @click="addTask">Add Task</button>
+
+        <div class="tasks" v-for="(task, index) in tasksList">
+            <span contenteditable="true">{{ task }}</span>
+            <span><i class="fas fa-trash" @click="deleteTask(index)"></i></span>
+        </div>
+
+        
+
+
+    </div>
 
 
     <!-- VUE-JS -->
