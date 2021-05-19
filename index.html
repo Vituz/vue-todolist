@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
    	 integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
    	 crossorigin="anonymous" />
+    
+    <!-- FONT STYLE -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+        
 
     <!-- STYLE -->
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -17,46 +22,55 @@
 </head>
 <body>
     <div id="app">
-        <div>
+        <div class="new_task">
             <input type="text" placeholder="Insert task here" v-model="task" v-on:keyup.enter="addTask">
             <button @click="addTask()">Add Task</button>
         </div>
 
-        <h2>Todo List</h2>
-        <div class="tasks" v-if="tasksList.length > 0">
-            <div class="tasksList" v-for="(task, index) in tasksList">
+        <div class="container">
 
-                <input type="text" v-model="compTask = task" v-on:keyup.enter="modTask(index)">
-
-                <span><i class="far fa-check-circle" @click="addCompleteTasks(index)"></i></span>
-                <span><i class="fas fa-trash" @click="deleteTask(index)"></i></span>
+            <!-- Todo List -->
+            <div class="tasks" v-if="tasksList.length > 0">
+                <h2>Todo List</h2>
+                <div class="tasksList" v-for="(task, index) in tasksList">
+    
+                    <input class="mod_task" type="text" v-model="compTask = task" v-on:keyup.enter="modTask(index)">
+    
+                    <span><i class="far fa-check-circle" @click="addCompleteTasks(index)"></i></span>
+                    <span><i class="fas fa-trash" @click="deleteTask(index)"></i></span>
+                </div>
             </div>
-        </div>
-
-        <div class="no_task" v-else>
-            <p>
-                Enjoy!!! Todo List is empty!
-            </p>
-        </div>
-
-        
-        <div class="complete_container" v-if="completeTasks.length !== 0">
-            <h2>Complete</h2>
-            <div class="completeTasks" v-for="(task, index) in completeTasks">
-                <span> {{ task }}</span>
-
-                <i class="fas fa-pen" @click="replace(index)"></i>
+    
+            <div class="no_task" v-else>
+                <h2>Todo List</h2>
+                <p>
+                    Enjoy!!! Todo List is empty!
+                </p>
             </div>
-        </div>
-
-        <div class="trash_container" v-if="trashTasks.length !== 0">
-            <h2>Trashed</h2>
-            <i class="fas fa-dumpster" @click="deleteAll"></i>
-            <div class="trashedTasks" v-for="(task, index) in trashTasks">
-                <span> {{task}} </span>
-
-                <i class="fas fa-trash-restore" @click="replaceTrash(index)"></i>
+            <!-- /Todo List -->
+    
+            <!-- Complete list -->
+            <div class="complete_container" v-if="completeTasks.length !== 0">
+                <h2>Completed</h2>
+                <div class="completeTasks" v-for="(task, index) in completeTasks">
+                    <span> {{ task }}</span>
+    
+                    <i class="fas fa-pen" @click="replace(index)"></i>
+                </div>
             </div>
+            <!-- /Complete list -->
+    
+            <!-- Trash List -->
+            <div class="trash_container" v-if="trashTasks.length !== 0">
+                <h2>Trashed</h2>
+                <i class="fas fa-dumpster" @click="deleteAll"></i>
+                <div class="trashedTasks" v-for="(task, index) in trashTasks">
+                    <span> {{task}} </span>
+    
+                    <i class="fas fa-trash-restore" @click="replaceTrash(index)"></i>
+                </div>
+            </div>
+            <!-- /Trash List -->
         </div>
         
 
