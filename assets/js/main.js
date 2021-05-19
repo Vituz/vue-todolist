@@ -6,6 +6,10 @@ const app = new Vue({
 
         task: '',
 
+        compTask: '',
+
+        completeTasks:[],
+
         tasksList: [
             'Learn HTML',
             'Learn CSS',
@@ -25,7 +29,28 @@ const app = new Vue({
 
         deleteTask(index){
             this.tasksList.splice(index, 1);
+            // alert(`Task n. ${index + 1} removed!`); togliere il commento
         },
 
+        addCompleteTasks(index){
+            // this.savedTasks.unshift(this.task);
+            let removeTask = this.tasksList.splice(index, 1);
+            // this.completeTasks.unshift(removeTask[0]);
+            this.completeTasks.unshift(removeTask[0]);
+        },
+
+        modTask(index){
+            console.log(this.compTask);
+            this.tasksList.unshift(this.compTask);
+            this.tasksList.splice(index +1, 1);
+        },
+
+        replace(index){
+            // this.savedTasks.unshift(this.task);
+            let removeTask = this.completeTasks.splice(index, 1);
+            // this.completeTasks.unshift(removeTask[0]);
+            this.tasksList.unshift(removeTask[0]);
+
+        }
     }
 });

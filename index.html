@@ -17,12 +17,37 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" placeholder="Insert task here" v-model="task" v-on:keyup.enter="addTask">
-        <button @click="addTask">Add Task</button>
+        <div>
+            <input type="text" placeholder="Insert task here" v-model="task" v-on:keyup.enter="addTask">
+            <button @click="addTask()">Add Task</button>
+        </div>
 
-        <div class="tasks" v-for="(task, index) in tasksList">
-            <span contenteditable="true">{{ task }}</span>
-            <span><i class="fas fa-trash" @click="deleteTask(index)"></i></span>
+        <h2>Todo List</h2>
+        <div class="tasks" v-if="tasksList.length > 0">
+            <div class="tasksList" v-for="(task, index) in tasksList">
+
+                <input type="text" v-model="compTask = task" v-on:keyup.enter="modTask(index)">
+
+                <span><i class="far fa-check-circle" @click="addCompleteTasks(index)"></i></span>
+                <span><i class="fas fa-trash" @click="deleteTask(index)"></i></span>
+            </div>
+        </div>
+
+        <div class="no_task" v-else>
+            <p>
+                Enjoy!!! Todo List is empty!
+            </p>
+        </div>
+
+        
+        <div class="complete">
+            <h2>Complete</h2>
+            <div class="completeTasks" v-for="(task, index) in completeTasks">
+                <span> {{ task }}</span>
+
+                <i class="fas fa-pen" @click="replace(index)"></i>
+
+            </div>
         </div>
 
         
